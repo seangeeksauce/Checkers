@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="wrapper">
+		<div class="jumbotron">
+			<h2 class='text-center'>Todays Items</h2>
+		</div>
+		<div class="container">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="new_item" class="col-sm-2 control-label">Add New Item</label>
+					<div class="col-sm-3">
+						<input type="new_item" class="form-control" id="new_item" placeholder="new_item">
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+			{% for event in events if event is not null %}
+				<a href="{{ path('items') }}" class="list-group-item">
+					<span class="badge"></span>
+					{{ event.title|default }}
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+CheckersBundle\Entity\Users:
+    type: entity
+    table: users
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            nullable: true
+            comment: ''
+            default: '0'
+        password:
+            type: text
+            nullable: true
+        hash:
+            type: text
+            nullable: true
+
+        email:
+            type: text
+            nullable: true
+
+        createdDate:
+            type: datetime
+            nullable: true
+        status:
+            type: string
+            nullable: true
+        deleted:
+            type: boolean
+            nullable: false
+            options:
+                default: "0"
+        is_active:
+            type: boolean
+            nullable: false
+            options:
+                default: "0"
+    lifecycleCallbacks: {  }

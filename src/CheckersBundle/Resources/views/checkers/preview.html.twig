@@ -1,0 +1,15 @@
+<div id="checkers-preview">
+    <div id="template-black" class="game-piece black-piece hidden"></div>
+    <div id="template-red" class="game-piece red-piece hidden"></div>
+    {% for row in 1..8 %}
+        <div class="section">
+        {% for i in 1..8 %}
+                <div class="position {{ row % 2 == 0 ?(i % 2 == 0 ? 'red' : 'black') : (i % 2 == 0 ? 'black' : 'red') }}">
+                    <div id="position-{{ ((row == 1 ? 0 : row - 1) * 8 ) + i }}"
+                         class="item position-{{ ((row == 1 ? 0 : row - 1) * 8 ) + i }}">{{ ((row == 1 ? 0 : row - 1) * 8 ) + i }}
+                        {# ((row == 1 ? 0 : row - 1) * 8 ) + i #}</div>
+                </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+</div>

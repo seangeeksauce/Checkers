@@ -1,0 +1,52 @@
+CheckersBundle\Entity\Game:
+    type: entity
+    table: games
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        status:
+            type: text
+            nullable: true
+        createdOn:
+            type: datetime
+            nullable: true
+            column: created_on
+        publicGame:
+            type: boolean
+            default: '0'
+            nullable: false
+            column: public_game
+        title:
+            type: text
+            nullable: true
+        password:
+            type: text
+            nullable: true
+    manyToOne:
+        opponent:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: users
+            inversedBy: null
+            column: opponent
+            joinColumns:
+                opponent:
+                    referencedColumnName: id
+            orphanRemoval: false
+        host:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: host
+            inversedBy: null
+            joinColumns:
+                host:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

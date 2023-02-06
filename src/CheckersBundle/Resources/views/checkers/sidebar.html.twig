@@ -1,0 +1,76 @@
+<div class="sidebar col-sm-7">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#view-games" aria-controls="view-games" role="tab" aria-controls="view-games" data-toggle="tab">View Games</a>
+        </li>
+        <li role="presentation"><a href="#invites" aria-controls="invites" role="tab" data-toggle="tab">Invites</a></li>
+        <li role="presentation"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">View Profile</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane sidebar-content active" id="view-games">
+            {% if games is empty %}
+                <p>No Public Games</p>
+            {% else %}
+                <h4>Public Games</h4>
+                <ul>
+                    {% for game in games if game is not empty %}
+                        <li><a data-host="{{ game.host.id }}" data-toggle="modal" data-target="#join-game" href="#">{{game.title|default|title ?: game.host.username|default|title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div role="tabpanel" class="tab-pane sidebar-content" id="invites">
+            {% if invites is empty %}
+                <p>No Pending Invites</p>
+            {% else %}
+                <h4>Invites</h4>
+            <ul>
+                {% for invite in invites if invite is not empty %}
+                    <li><a data-host="{{ invite.sender.id }}" data-toggle="modal" data-target="#join-game" href="#">{{'Invite from: ' ~ invite.sender.username|default|title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </div>
+        <div role="tabpanel" class="tab-pane sidebar-content" id="friends">
+            <h4 class="lead">Status:</h4>
+            {% if friends is empty %}
+                <p>No Friends</p>
+            {% else %}
+                <ul>
+                {% for friend in friends if friend is not empty %}
+                    <li><a data-toggle="modal" data-target="#myModal" href="#">{{ friend.users.username|title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h4 class="lead">Pending Friend Requests</h4>
+            {% if pendingFriends is empty %}
+                <p>No Pending Friend Requests</p>
+                {% else %}
+                <ul>
+                    {% for pending in pendingFriends if pendingFriends is not empty %}
+                        <li><a data-toggle="modal" data-target="#pending-invite" href="#">{{ pending.sender.username|title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p><button data-toggle="modal" data-target="#add-friend" type="button" class="btn btn-primary">Add</button></p>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane sidebar-content" id="profile">
+            <h4>My Profile Info</h4>
+            <p>Username: {{ app.user.username }}</p>
+            <p>Email: {{ app.user.email }}</p>
+            <p>Joined Date: {{ app.user.createdDate|default('N/A') }}</p>
+
+        </div>
+    </div>
+</div>

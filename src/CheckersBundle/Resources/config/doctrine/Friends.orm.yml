@@ -1,0 +1,42 @@
+CheckersBundle\Entity\Friends:
+    type: entity
+    table: friends
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        deleted:
+            type: boolean
+            nullable: false
+            comment: ''
+            options:
+                default: "0"
+        createdOn:
+            type: datetime
+            nullable: true
+    manyToOne:
+        users:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: users
+            inversedBy: null
+            joinColumns:
+                users:
+                    referencedColumnName: id
+            orphanRemoval: false
+        friend:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: users
+            inversedBy: null
+            joinColumns:
+                friend:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

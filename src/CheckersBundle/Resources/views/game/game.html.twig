@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+    {% block body %}
+        {{ parent() }}
+
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="checkers-preview">
+                    {% include 'CheckersBundle:Checkers:preview.html.twig' %}
+                </div>
+            </div>
+
+            {{ render(controller('CheckersBundle:Checkers:sidebarModule')) }}
+
+        </div>
+        {% include 'CheckersBundle:checkers:modals/friends-list.modal.html.twig' %}
+        {% include 'CheckersBundle:checkers:modals/join-game.modal.html.twig' %}
+        {% include 'CheckersBundle:checkers:modals/add-friend.modal.html.twig' %}
+        {% include 'CheckersBundle:checkers:modals/accept-invite.modal.html.twig' %}
+
+    {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+        {% javascripts
+        '@CheckersBundle/Resources/public/js/checkers/checkers.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}

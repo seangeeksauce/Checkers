@@ -1,0 +1,49 @@
+CheckersBundle\Entity\PendingInvites:
+    type: entity
+    table: pending_invites
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        inviteType:
+            type: text
+            nullable: true
+            column: invite_type
+        status:
+            type: text
+            nullable: true
+        createdOn:
+            type: datetime
+            nullable: true
+            column: created_on
+        acceptedOn:
+            type: datetime
+            nullable: true
+            column: accepted_on
+    manyToOne:
+        targetUser:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: users
+            inversedBy: null
+            column: target_user
+            joinColumns:
+                target_user:
+                    referencedColumnName: id
+            orphanRemoval: false
+        sender:
+            targetEntity: Users
+            cascade: {  }
+            mappedBy: sender
+            inversedBy: null
+            joinColumns:
+                sender:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

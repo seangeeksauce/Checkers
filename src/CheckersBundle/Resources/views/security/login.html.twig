@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+        '@CheckersBundle/Resources/public/css/Common/login.css'
+        filter='cssrewrite'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="text-center" style="color:#FFF">Please Sign In</h3>
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="error text-center flash-notice">
+                        <div class="error text-danger">Incorrect Username or Password Entered</div>
+                    </div>
+                {% endfor %}
+
+                <form class="form-signin" action="{{ path('login.submit') }}" method="post">
+                    <label class="sr-only" for="username">User Name</label>
+                    <input type="text" class="form-control" id="username" name="_username" value="{{ username }}" placeholder="Username">
+                    <label class="sr-only" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+                    <input type="hidden" name="_target_path" value="/checkers" />
+                    <br>
+                    <a href="{{ path('user_registration') }}">Register Here</a>
+
+                    <button type="submit" class="submit btn btn-lg btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+{% endblock %}

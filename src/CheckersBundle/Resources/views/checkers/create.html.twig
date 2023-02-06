@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-sm-12 font-light">
+            <form method="post" id="create_game" action="{{ path('checkers.create') }}">
+                <div class="form-group">
+                    <label for="title">Game Name</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Game Name">
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="enable_password" value="">
+                        Password
+                    </label>
+                </div>
+
+                <div class="form-group hidden">
+                    <label for="game_password">Game Password</label>
+                    <input type="text" class="form-control" name="game_password" id="game_password" placeholder="Game Password">
+                </div>
+
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="public_game" id="public_game" value="1" checked>
+                            Public Game
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="public_game" id="public_game2" value="0">
+                        Private Game (Requires invite)
+                    </label>
+                </div>
+                <input type="submit" class="btn btn-primary" name="submit">
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@CheckersBundle/Resources/public/js/checkers/create.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
