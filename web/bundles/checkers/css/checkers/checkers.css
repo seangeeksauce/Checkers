@@ -1,0 +1,17 @@
+.checkers-preview {
+    width:100%;
+    height:350px;
+    display:block;
+    background:#CCC;
+    border:1px solid #666;
+}
+.sidebar {
+    height: 450px;
+    background:#111
+}
+.sidebar-content ul {
+    margin-top:10px
+}
+.sidebar-content ul li {
+    color:#999;
+}

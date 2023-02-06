@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Checkers!{% endblock %}</title>
+        {% block stylesheets %}
+        {% stylesheets
+        '@CheckersBundle/Resources/public/css/Common/bootstrap.min.css'
+        '@CheckersBundle/Resources/public/css/Common/bootstrap-theme.min.css'
+        '@CheckersBundle/Resources/public/css/Common/theme.css'
+        '@CheckersBundle/Resources/public/css/checkers/checkers.css'
+        filter='cssrewrite'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+    <div class="wrapper">
+        <div class="jumbotron header">
+            <h2 class='text-center'>Lets play some Checkers!</h2>
+        </div>
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% javascripts
+        '@CheckersBundle/Resources/public/js/common/jquery-1.12.0.min.js'
+        '@CheckersBundle/Resources/public/js/common/bootstrap.min.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,71 @@
+app:
+    resource: "@CheckersBundle/Controller/"
+    type:     annotation
+# app/config/routing.yml
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+homepage:
+    path: /
+    defaults:
+        _controller: CheckersBundle:Security:login
+
+login:
+    path: /login
+    defaults:
+        _controller: CheckersBundle:Security:login
+
+login.submit:
+    path: /login/submit
+    methods:
+        - POST
+
+logout:
+    path: /logout
+
+login_check:
+    path: login-check
+    defaults:
+        _controller: CheckersBundle:Security:loginCheck
+
+checkers:
+    path: checkers
+    defaults:
+        _controller: CheckersBundle:Checkers:checkersIndex
+
+checkers.play:
+    path: checkers/play/{gameId}/{session}
+    defaults:
+        _controller: CheckersBundle:play
+        gameId: null
+        session: null
+
+checkers.create:
+    path: checkers/create
+    defaults:
+        _controller: CheckersBundle:Checkers:create
+
+checkers.friends.add:
+    path: checkers/friends/add
+    defaults:
+        _controller: CheckersBundle:Checkers:addFriend
+    options:
+        expose: true
+
+checkers.friends.remove:
+    path: checkers/friends/remove
+    defaults:
+        _controller: CheckersBundle:Checkers:removeFriend
+
+game:
+    path: game/{id}
+    defaults:
+        _controller: CheckersBundle:Game:active
+        id: null
+    options:
+        expose: true
+
+# app/config/routing.yml
+user_registration:
+    path: /register
+    defaults:
+        _controller: CheckersBundle:Registration:register

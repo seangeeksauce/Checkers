@@ -1,0 +1,51 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        CheckersBundle\Entity\Users:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        ROLE_API_V1: []
+        ROLE_API_USER:
+            - ROLE_USER
+        ROLE_SENDGRID_API:
+            - ROLE_USER
+        ROLE_ADMIN:
+            - ROLE_USER
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
+
+    providers:
+        our_db_provider:
+            entity:
+                class: CheckersBundle:Users
+                property: email
+#        in_memory:
+#            memory: ~
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern: ^/(login)?$
+            anonymous: ~
+
+        main:
+            pattern: ^/
+            provider: our_db_provider
+            form_login:
+                login_path: login
+                check_path: login.submit
+            logout:
+                path: logout
+                target: homepage
+
+    access_control:
+        - path: ^/
+          roles:
+              - IS_AUTHENTICATED_ANONYMOUSLY
